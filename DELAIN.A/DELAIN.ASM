@@ -18,7 +18,7 @@
 ;yasm
 ;----
 ;yasm -f win64 -o delain.obj delain.asm
-;link delain.obj /defaultlib:kernel32.lib /defaultlib:user32.lib /entry:main /section:.text,erw /subsystem:console
+;link delain.obj /defaultlib:kernel32.lib /defaultlib:user32.lib /entry:main /section:.text,erw /subsystem:console /largeaddressaware:no /fixed
 ;---
 ;
 ;old and new - W64 codebase from BeautifulSky, and EPO from Nova in 2009
